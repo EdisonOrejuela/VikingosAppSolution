@@ -1,0 +1,43 @@
+﻿@model List<VikingosMVC.Models.VikingoGrid>
+@{
+    ViewBag.Title = "Vikingos";
+}
+
+<h2></h2>
+<button onclick="location.href='@Url.Action("AddVikingoForm", "Vikingo")'"
+        class="btn btn-success">
+    Agregar vikingo
+</button>
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th hidden="hidden"></th>
+            <th>Nombre</th>
+            <th>Batallas ganadas</th>
+            <th>Arma favorita</th>
+            <th>Honor</th>
+            <th>Muerte gloriosa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden="hidden">@item.Id</td>
+                <td>@item.Nombre</td>
+                <td>@item.BatallasGanadas</td>
+                <td>@item.ArmaFavorita</td>
+                <td>@item.NivelHonor</td>
+                <td>@item.MuerteGloriosa</td>
+                <td>
+                    <a href="@Url.Action("EditVikingoForm", "Vikingo", new { vikingoId = item.Id })" class="btn btn-sm btn-primary">Editar</a>
+
+                    <a href="@Url.Action("Delete", "Vikingo", new { vikingoId = item.Id })" class="btn btn-sm btn-danger"
+                       onclick="return confirm('¿Seguro que deseas eliminar este registro?');">Eliminar</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

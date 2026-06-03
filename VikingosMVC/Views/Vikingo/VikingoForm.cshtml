@@ -1,0 +1,108 @@
+﻿@model VikingosMVC.Models.Vikingo
+@{
+    ViewBag.Title = "VikingoForm";
+}
+
+@if (Model.Id == 0)
+{
+    <h2>Nuevo Vikingo</h2>
+    using (Html.BeginForm("Save", "Vikingo", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nombre)
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Nombre, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BatallasGanadas)
+            @Html.TextBoxFor(m => m.BatallasGanadas, new
+       {
+           @type = "number",
+           @step = "1",
+           @class = "form-control"
+       })
+            @Html.ValidationMessageFor(m => m.BatallasGanadas, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ArmaFavoritaId)
+            @Html.DropDownList("ArmaFavoritaId",
+                                   Model.ListaArmas,
+                                   "Seleccione una arma",
+                                   new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ArmaFavoritaId, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.NivelHonorId)
+            @Html.DropDownList("NivelHonorId",
+                                   Model.ListaNivelHonor,
+                                   "Seleccione un nivel",
+                                   new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.NivelHonorId, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MuerteGloriosaId)
+            @Html.DropDownList("MuerteGloriosaId",
+                                   Model.ListaMuerteGloriosa,
+                                   "Seleccione",
+                                   new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MuerteGloriosaId, null, new { @class = "text-danger" })
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Guardar</button>
+
+    }
+}
+else
+{
+    <h2>Editar Vikingo</h2>
+    using (Html.BeginForm("Update", "Vikingo", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(m => m.Id, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nombre)
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Nombre, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BatallasGanadas)
+            @Html.TextBoxFor(m => m.BatallasGanadas, new
+       {
+           @type = "number",
+           @step = "1",
+           @class = "form-control"
+       })
+            @Html.ValidationMessageFor(m => m.BatallasGanadas, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ArmaFavoritaId)
+            @Html.DropDownList("ArmaFavoritaId",
+                                   Model.ListaArmas,
+                                   "Seleccione una arma",
+                                   new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ArmaFavoritaId, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.NivelHonorId)
+            @Html.DropDownList("NivelHonorId",
+                                   Model.ListaNivelHonor,
+                                   "Seleccione un nivel",
+                                   new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.NivelHonorId, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MuerteGloriosaId)
+            @Html.DropDownList("MuerteGloriosaId",
+                                   Model.ListaMuerteGloriosa,
+                                   "Seleccione",
+                                   new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MuerteGloriosaId, null, new { @class = "text-danger" })
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Actualizar</button>
+
+    }
+
+}
+
