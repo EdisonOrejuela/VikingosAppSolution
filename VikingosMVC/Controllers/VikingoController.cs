@@ -30,6 +30,10 @@ namespace VikingosMVC.Controllers
                     var json = await response.Content.ReadAsStringAsync();
                     list = JsonConvert.DeserializeObject<List<Vikingo>>(json);
                 }
+                else
+                {
+                    return View("~/Views/Shared/Error.cshtml");
+                }
             }
             foreach (var item in list)
             {
@@ -67,6 +71,10 @@ namespace VikingosMVC.Controllers
                     var json = await response.Content.ReadAsStringAsync();
                     vikingoEdit = JsonConvert.DeserializeObject<Vikingo>(json);
                 }
+                else
+                {
+                    return View("~/Views/Shared/Error.cshtml");
+                }
             }
 
             this.LoadDropDownItems(ref vikingoEdit);
@@ -80,9 +88,9 @@ namespace VikingosMVC.Controllers
                 var response = await client.DeleteAsync($"{vikingoUrlAPI}/{vikingoId}");
                 if (response.IsSuccessStatusCode)
                     return RedirectToAction("Index");
+                else
+                    return View("~/Views/Shared/Error.cshtml");
             }
-
-            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -103,9 +111,9 @@ namespace VikingosMVC.Controllers
                 var response = await client.PutAsync($"{vikingoUrlAPI}/{updateVikingo.Id}", content);
                 if (response.IsSuccessStatusCode)
                     return RedirectToAction("Index");
+                else
+                    return View("~/Views/Shared/Error.cshtml");
             }
-
-            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -125,9 +133,10 @@ namespace VikingosMVC.Controllers
                 var response = await client.PostAsync(vikingoUrlAPI, content);
                 if (response.IsSuccessStatusCode)
                     return RedirectToAction("Index");
-            }
 
-            return RedirectToAction("Index");
+                else
+                    return View("~/Views/Shared/Error.cshtml");
+            }
         }
 
         private void LoadDropDownItems(ref Vikingo vikingoItem)
